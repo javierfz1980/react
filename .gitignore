@@ -1,0 +1,11 @@
+# System Files
+.DS_Store
+Thumbs.db
+
+# Intellij files
+*.iml
+.idea/*
+
+# vscode files
+.vscode/launch.json
+.vscode/settings.json
