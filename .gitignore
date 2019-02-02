@@ -9,3 +9,6 @@ Thumbs.db
 # vscode files
 .vscode/launch.json
 .vscode/settings.json
+
+# dependencies
+node_modules/
