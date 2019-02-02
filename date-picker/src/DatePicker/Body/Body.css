@@ -1,0 +1,14 @@
+.Weekday {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: lightcyan;
+    border: 1px solid gray;
+    font-size: 10px;
+    line-height: 20px;
+}
+
+.Body {
+    width: 210px;
+    height: 210px;
+}

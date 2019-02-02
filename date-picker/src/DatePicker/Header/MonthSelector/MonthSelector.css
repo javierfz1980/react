@@ -1,0 +1,21 @@
+.wrapper {
+    background-color: #cccccc;
+    display: flex;
+    height: 30px;
+}
+
+.arrow {
+    flex: 1;
+}
+
+.label {
+    flex: 80;
+    font-size: 15px;
+    line-height: 30px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.element {
+    padding: 10px;
+}
