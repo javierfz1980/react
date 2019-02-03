@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import StyledButton from "../../theme/gl-theme/Buttons";
 import {LoginStyles} from "./Login-styles";
-import axios from 'axios';
+import {authService} from "../../shared/services/AuthService";
 
 class Login extends Component {
 
@@ -20,7 +20,8 @@ class Login extends Component {
     loading: false,
     loggedIn: false,
     email: '',
-    password: ''
+    password: '',
+    error: null
   };
 
   handleSubmit = (event) => {
@@ -30,13 +31,17 @@ class Login extends Component {
       password: this.state.password
     };
     console.log('try to login...', payload);
-    axios.post('http://localhost:3001/login', payload)
-      .then(response => {
-        if (response.data['token'] && response.data['token'] !== null && response.data['token'] !== undefined) {
-          console.log('login success:', response.data);
+    authService.login(payload)
+      .then(token => {
+        if (token) {
+          console.log('login success:', token);
+          this.props.history.push('/webapp');
+        } else {
+          this.setState(authService.genericLoginError);
         }
       })
-      .catch(error => console.log('error:', error))
+      .catch(error => this.setState({error: error.message}));
+
   };
 
   handleInputChange = (event) => {
@@ -58,6 +63,9 @@ class Login extends Component {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          <Typography color='error'>
+            {this.state.error}
+          </Typography>
           <form className={classes.form} onSubmit={this.handleSubmit}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -69,14 +77,12 @@ class Login extends Component {
             </FormControl>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+              label="Remember me"/>
             <StyledButton
               type="submit"
               fullWidth
               variant="contained"
-              className={classes.submit}
-            >
+              className={classes.submit}>
               Sign in
             </StyledButton>
           </form>
@@ -85,47 +91,5 @@ class Login extends Component {
     );
   };
 }
-/*const Login = (props) => {
-
-  const { classes } = props;
-
-  return (
-    <main className={classes.main}>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" autoComplete="current-password" />
-          </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <StyledButton
-            type="submit"
-            fullWidth
-            variant="contained"
-            className={classes.submit}
-            clicked={}
-          >
-            Sign in
-          </StyledButton>
-        </form>
-      </Paper>
-    </main>
-  );
-};*/
-
 
 export default withStyles(LoginStyles)(Login);

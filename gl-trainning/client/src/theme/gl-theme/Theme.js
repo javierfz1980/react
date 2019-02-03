@@ -1,6 +1,6 @@
 import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
 import orange from "@material-ui/core/es/colors/orange";
-import grey from "@material-ui/core/es/colors/grey";
+import red from "@material-ui/core/es/colors/red";
 
 const glTheme = createMuiTheme({
   palette: {
@@ -8,7 +8,7 @@ const glTheme = createMuiTheme({
     secondary: {
       ...orange,
     },
-    error: grey,
+    error: red,
   },
   typography: {
     fontFamily:
