@@ -1,7 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {AuthConsumer} from "../../contexts/AuthContext";
 
-const Webapp = (props) => {
-  return <h1>Webapp</h1>
-};
+
+class Webapp extends Component {
+  render() {
+    return (
+      <AuthConsumer>
+        {context => <div>Webapp: {context.isAuthorized.toString()} {context.username}</div>}
+      </AuthConsumer>
+    )
+  }
+}
 
 export default Webapp;

@@ -13,12 +13,13 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import StyledButton from "../../theme/gl-theme/Buttons";
 import {LoginStyles} from "./Login-styles";
 import {authService} from "../../shared/services/AuthService";
+import AuthContext from "../../contexts/AuthContext";
+
 
 class Login extends Component {
 
   state = {
     loading: false,
-    loggedIn: false,
     email: '',
     password: '',
     error: null
@@ -35,9 +36,10 @@ class Login extends Component {
       .then(token => {
         if (token) {
           console.log('login success:', token);
+          this.props.onLoginSuccess(this.state.email);
           this.props.history.push('/webapp');
         } else {
-          this.setState(authService.genericLoginError);
+          this.setState({error: authService.genericLoginError});
         }
       })
       .catch(error => this.setState({error: error.message}));
