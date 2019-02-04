@@ -16,6 +16,12 @@ class App extends Component {
     }
   };
 
+  componentWillMount = () => {
+    if (localStorage.getItem('token')) {
+      this.updateAuthState(localStorage.getItem('username'))
+    }
+  };
+
   updateAuthState = (username) => {
     this.setState({
       auth: {

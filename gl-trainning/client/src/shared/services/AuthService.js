@@ -9,6 +9,7 @@ function login (payload) {
     .then(response => {
       const token = response.data['token'];
       localStorage.setItem('token', token);
+      localStorage.setItem('username', payload.username);
       return token;
     })
     .catch(error => {
