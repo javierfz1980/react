@@ -13,15 +13,13 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import StyledButton from "../../theme/gl-theme/Buttons";
 import {LoginStyles} from "./Login-styles";
 import {authService} from "../../shared/services/AuthService";
-import AuthContext from "../../contexts/AuthContext";
-
 
 class Login extends Component {
 
   state = {
     loading: false,
-    email: '',
-    password: '',
+    email: 'javierfz1980@gmail.com',
+    password: 'asd',
     error: null
   };
 
